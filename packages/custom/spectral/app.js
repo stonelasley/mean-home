@@ -16,6 +16,8 @@ Spectral.register(function(app, auth, database) {
   //We enable routing. By default the Package Object is passed to the routes
   Spectral.routes(app, auth, database);
 
+  app.set('views', __dirname + '/server/views');
+
   //We are adding a link to the main menu for all authenticated users
   Spectral.menus.add({
     title: 'spectral example page',
@@ -23,8 +25,16 @@ Spectral.register(function(app, auth, database) {
     roles: ['authenticated'],
     menu: 'main'
   });
-  
+
   Spectral.aggregateAsset('css', 'spectral.css');
+
+  Spectral.aggregateAsset('js', 'jquery.scrollex.min.js', {weight: -4, group: 'footer'});
+  Spectral.aggregateAsset('js', 'jquery.scrolly.min.js', {weight: -3, group: 'footer'});
+  Spectral.aggregateAsset('js', 'skel.min.js', {weight: -1, group: 'footer'});
+  Spectral.aggregateAsset('js', 'util.js', {weight: -1, group: 'footer'});
+  Spectral.aggregateAsset('js', 'spectral.js', {weight: -1, group: 'footer'});
+
+  Spectral.angularDependencies(['mean.system']);
 
   /**
     //Uncomment to use. Requires meanio@0.3.7 or above

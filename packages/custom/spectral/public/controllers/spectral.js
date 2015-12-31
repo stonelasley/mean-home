@@ -1,7 +1,7 @@
 'use strict';
 
 /* jshint -W098 */
-angular.module('mean.spectral').controller('SpectralController', ['$scope', 'Global', 'Spectral',
+var Spectral = angular.module('mean.spectral').controller('SpectralController', ['$scope', 'Global', 'Spectral',
   function($scope, Global, Spectral) {
     $scope.global = Global;
     $scope.package = {
@@ -9,3 +9,8 @@ angular.module('mean.spectral').controller('SpectralController', ['$scope', 'Glo
     };
   }
 ]);
+
+Spectral.config(['$viewPathProvider', function ($viewPathProvider) {
+  $viewPathProvider.override('system/views/header.html', 'spectral/views/header.html');
+  $viewPathProvider.override('system/views/index.html', 'spectral/views/index.html');
+}]);
