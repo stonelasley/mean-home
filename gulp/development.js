@@ -16,7 +16,7 @@ var gulp = require('gulp'),
   };
 
 /*var defaultTasks = ['clean', 'jshint', 'less', 'csslint', 'devServe', 'watch'];*/
-var defaultTasks = ['coffee','clean', 'less', 'csslint', 'devServe', 'watch'];
+var defaultTasks = ['coffee','clean', 'less', 'sass', 'csslint', 'devServe', 'watch'];
 
 gulp.task('env:development', function () {
   process.env.NODE_ENV = 'development';
@@ -42,6 +42,13 @@ gulp.task('less', function() {
     .pipe(plugins.less())
     .pipe(gulp.dest('./packages'));
 });
+
+gulp.task('sass', function() {
+  return gulp.src(paths.sass)
+    .pipe(plugins.sass().on('error', plugins.sass.logError))
+    .pipe(gulp.dest('./packages'));
+});
+
 
 gulp.task('devServe', ['env:development'], function () {
 
@@ -86,6 +93,7 @@ gulp.task('watch', function () {
   gulp.watch(paths.js, ['jshint']);
   gulp.watch(paths.css, ['csslint']).on('change', plugins.livereload.changed);
   gulp.watch(paths.less, ['less']);
+  gulp.watch(paths.sass, ['sass']);
 });
 
 function count(taskName, message) {
