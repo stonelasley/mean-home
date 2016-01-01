@@ -2482,3 +2482,9 @@ body.is-mobile.landing .wrapper.style4 {
 
 body.is-mobile.landing #footer {
   background-color: #1d242a; }
+
+/* Admin Menu */
+#admin-menu {
+  top: 0px; }
+  #admin-menu li {
+    margin-top: 1em; }

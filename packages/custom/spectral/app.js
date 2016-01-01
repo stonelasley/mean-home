@@ -27,12 +27,14 @@ Spectral.register(function(app, auth, database) {
   });
 
   Spectral.aggregateAsset('css', 'spectral.css');
+  Spectral.aggregateAsset('css', 'menu.css');
 
   Spectral.aggregateAsset('js', 'jquery.scrollex.min.js', {weight: -4, group: 'footer'});
   Spectral.aggregateAsset('js', 'jquery.scrolly.min.js', {weight: -3, group: 'footer'});
   Spectral.aggregateAsset('js', 'skel.min.js', {weight: -1, group: 'footer'});
   Spectral.aggregateAsset('js', 'util.js', {weight: -1, group: 'footer'});
   Spectral.aggregateAsset('js', 'spectral.js', {weight: -1, group: 'footer'});
+  Spectral.aggregateAsset('js', 'menu.js', {weight: -1, group: 'footer'});
 
   Spectral.angularDependencies(['mean.system']);
 

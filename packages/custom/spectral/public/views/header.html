@@ -1,20 +1,23 @@
 <!-- Header -->
-<header id="header" class="alt">
+<header id="header" class="alt" ng-controller="HeaderController as hdrctr">
     <h1><a href="index.html">Spectral</a></h1>
-    <nav id="nav">
-        <ul>
-            <li class="special">
-                <a href="#menu" class="menuToggle"><span>Menu</span></a>
-                <div id="menu">
-                    <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="generic.html">Generic</a></li>
-                        <li><a href="elements.html">Elements</a></li>
-                        <li><a href="#">Sign Up</a></li>
-                        <li><a href="#">Log In</a></li>
-                    </ul>
-                </div>
-            </li>
-        </ul>
+    <nav id="nav" ng-controller="DrawerController as drawer">
+       <ul>
+           <li class="special">
+               <a href="" ng-click="showRight($event)" class="menuToggle"><span>Menu</span></a>
+           </li>
+       </ul>
+        <drawer visible="rightVisible" alignment="right">
+            <drawer-item><img src="https://material.angularjs.org/latest/img/icons/angular-logo.svg"/></drawer-item>
+            <drawer-item ng-class="{active: $uiRoute}" ui-sref='{{item.link}}' hash="first-page" ng-repeat="item in hdrctr.menus.main">{{item.title}}</drawer-item>
+            <drawer-item ng-show="hdrctr.hdrvars.authenticated" hash="{{hdrctr.hdrvars.user.name}}">{{hdrctr.hdrvars.user.name | uppercase}}</drawer-item>
+            <drawer-item ng-show="hdrctr.hdrvars.authenticated" ng-click="hdrctr.logout()">Log Out</drawer-item>
+            <drawer-item ng-show="!hdrctr.hdrvars.authenticated" ui-sref='auth.register'>Join</drawer-item>
+            <drawer-item ng-show="!hdrctr.hdrvars.authenticated" ui-sref='auth.login'>Log In</drawer-item>
+            <div ng-show="hdrctr.hdrvars.authenticated">
+                <div mean-token-editable></div>
+                <div mean-translate></div>
+            </div>
+        </drawer>
     </nav>
 </header>
