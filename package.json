@@ -58,6 +58,7 @@
     "del": "latest",
     "expect.js": "latest",
     "gulp": "latest",
+    "gulp-autoprefixer": "^3.1.0",
     "gulp-coffee": "latest",
     "gulp-concat": "latest",
     "gulp-csslint": "latest",
