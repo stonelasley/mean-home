@@ -12,15 +12,10 @@ var gulp = require('gulp'),
     css: ['packages/**/*.css', '!packages/**/node_modules/**', '!packages/**/assets/**/lib/**','!packages/core/**/public/assets/css/*.css'],
     less: ['packages/**/*.less', '!packages/**/_*.less', '!packages/**/node_modules/**', '!packages/**/assets/**/lib/**'],
     sass: ['packages/**/*.scss', '!packages/**/node_modules/**', '!packages/**/assets/**/lib/**'],
-    coffee: ['packages/**/*.coffee', '!packages/**/node_modules/**', '!packages/**/assets/**/lib/**'],
-    foundationInclude: ['packages/custom/home/public/assets/scss', 'packages/custom/home/public/assets/lib/foundation-apps/scss'],
-    home: {
-      input: 'packages/custom/home/public/assets/scss/main.scss',
-      output: 'packages/custom/home/public/assets/css'
-    }
+    coffee: ['packages/**/*.coffee', '!packages/**/node_modules/**', '!packages/**/assets/**/lib/**']
   };
 
-var defaultTasks = ['coffee','clean', 'foundation', 'csslint', 'devServe', 'watch'];
+var defaultTasks = ['coffee','clean', 'less', 'foundation', 'csslint', 'devServe', 'watch'];
 
 gulp.task('env:development', function () {
   process.env.NODE_ENV = 'development';
@@ -52,31 +47,6 @@ gulp.task('sass', function() {
     .pipe(plugins.sass().on('error', plugins.sass.logError))
     .pipe(gulp.dest('./packages'));
 });
-
-//Todo this has to be improved
-gulp.task('foundation', function () {
-
-  //var myPaths = {
-  //  sass: [
-  //    'packages/custom/home/public/assets/scss',
-  //    'packages/custom/home/public/assets/lib/foundation-apps/scss'
-  //  ],
-  //  main: 'packages/custom/home/public/assets/scss/main.scss',
-  //  output: 'packages/custom/home/public/assets/css'
-  //};
-
-  return gulp.src(paths.home.input)
-    .pipe(plugins.sass({
-      includePaths: paths.foundationInclude,
-      errLogToConsole: true
-    }))
-    .pipe(plugins.autoprefixer({
-      browsers: ['last 2 versions', 'ie 10']
-    }))
-    .pipe(gulp.dest(paths.home.output))
-    ;
-});
-
 
 gulp.task('devServe', ['env:development'], function () {
 
@@ -118,8 +88,8 @@ gulp.task('watch', function () {
   plugins.livereload.listen({interval:500});
 
   gulp.watch(paths.coffee,['coffee']);
-  //gulp.watch(paths.js, ['jshint']);
-  //gulp.watch(paths.css, ['csslint']).on('change', plugins.livereload.changed);
+  gulp.watch(paths.js, ['jshint']);
+  gulp.watch(paths.css, ['csslint']).on('change', plugins.livereload.changed);
   gulp.watch(paths.less, ['less']);
   //gulp.watch(paths.sass, ['sass']);
 });
